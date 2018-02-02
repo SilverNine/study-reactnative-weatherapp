@@ -19,7 +19,7 @@ export default class Weather extends Component {
     )
   }
 }
-
+//1d78bc6f5a71991641312e774f89bc2e
 const styles = StyleSheet.create({
   container: {
     flex: 1
