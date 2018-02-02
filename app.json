@@ -1,8 +1,14 @@
 {
   "expo": {
+<<<<<<< HEAD
     "name": "study-reactnative-weatherapp",
     "description": "This project is really great.",
     "slug": "study-reactnative-weatherapp",
+=======
+    "name": "study-reactnative",
+    "description": "This project is really great.",
+    "slug": "study-reactnative",
+>>>>>>> c272f29199cd4f1b9cce74c07d3a111c10e65bbc
     "privacy": "public",
     "sdkVersion": "25.0.0",
     "platforms": ["ios", "android"],
