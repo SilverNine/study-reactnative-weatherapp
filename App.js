@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { ActivityIndicator, AppRegistry, StyleSheet, Text, View, StatusBar } from "react-native"
 import Weather from "./Weather.js"
-
+const API_KEY = "1d78bc6f5a71991641312e774f89bc2e"
 export default class App extends Component {
   state = {
     isLoaded: false,
@@ -19,6 +19,10 @@ export default class App extends Component {
         })
       }
     )
+  }
+
+  _getWeather = (lat, lon) => {
+    fetch(`http://samples.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_KEY}`)
   }
 
   render() {
