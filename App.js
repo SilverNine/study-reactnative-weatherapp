@@ -5,13 +5,15 @@ const API_KEY = "1d78bc6f5a71991641312e774f89bc2e"
 export default class App extends Component {
   state = {
     isLoaded: false,
-    error: null
+    error: null,
+    temperature: null,
+    name: null
   }
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       position => {
-        this.setState({ isLoaded: true })
+        this._getWeather(position.coords.latitude, position.coords.longitude)
       },
       error => {
         this.setState({
@@ -22,16 +24,24 @@ export default class App extends Component {
   }
 
   _getWeather = (lat, lon) => {
-    fetch(`http://samples.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_KEY}`)
+    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
+      .then(response => response.json())
+      .then(json => {
+        this.setState({
+          temperature: json.main.temp,
+          name: json.weather[0].main,
+          isLoaded: true
+        })
+      })
   }
 
   render() {
-    const { isLoaded, error } = this.state
+    const { isLoaded, error, temperature, name } = this.state
     return (
       <View style={styles.container}>
         <StatusBar hidden={true} />
         {isLoaded ? (
-          <Weather />
+          <Weather temp={Math.floor(temperature - 273.15)} weatherName={name} />
         ) : (
           <View style={styles.loading}>
             <Text style={styles.loadingText}>Getting the fucking weather</Text>
